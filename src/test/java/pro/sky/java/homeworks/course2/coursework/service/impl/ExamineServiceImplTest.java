@@ -57,14 +57,6 @@ class ExamineServiceImplTest {
     @Test
     void testGetQuestions() {
         when(questionServiceMock.getRandomQuestion()).thenReturn(question1, question2, question3);
-//        when(questionServiceMock.getAll().size()).thenReturn(3);
-        /*пришлось создать метод getSizeOfQuestions() для более прямого получения размера созданной
-        в JavaQuestionServiceImpl коллекции, потому что Идея наотрез отказывалась воспринимать размер этой коллекции,
-        определяемый через метод questionService.GetAll().size();
-        тест завершался с ошибкой:
-        "org.mockito.exceptions.misusing.WrongTypeOfReturnValue:
-        Integer cannot be returned by getAll()
-        getAll() should return Collection"*/
         when(questionServiceMock.getSizeOfQuestions()).thenReturn(3);
 
         List<Question> randomQuestionTestList = new ArrayList<>();
