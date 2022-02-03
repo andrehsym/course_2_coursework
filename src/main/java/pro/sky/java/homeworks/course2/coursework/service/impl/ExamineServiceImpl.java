@@ -20,8 +20,8 @@ private final QuestionService questionService;
 
     @Override
     public List<Question> getQuestions(int amount) {
-//        if (amount > questionService.getAll().size() || amount < 0)
-            if (amount > questionService.getSizeOfQuestions() || amount < 0) {
+        if (amount > questionService.getAll().size() || amount < 0) {
+//            if (amount > questionService.getSizeOfQuestions() || amount < 0) {
             throw new QuestionListOutOfBoundException();
         }
         List<Question> randomQuestionList = new ArrayList<>();

@@ -57,7 +57,9 @@ class ExamineServiceImplTest {
     @Test
     void testGetQuestions() {
         when(questionServiceMock.getRandomQuestion()).thenReturn(question1, question2, question3);
-        when(questionServiceMock.getSizeOfQuestions()).thenReturn(3);
+        when(questionServiceMock.getAll()).thenReturn(randomQuestions);
+//        when(questionServiceMock.getAll().size()).thenReturn(randomQuestions.size());
+//        when(questionServiceMock.getSizeOfQuestions()).thenReturn(3);
 
         List<Question> randomQuestionTestList = new ArrayList<>();
         randomQuestionTestList.add(question1);
