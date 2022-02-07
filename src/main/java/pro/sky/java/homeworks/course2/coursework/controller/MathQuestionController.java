@@ -1,6 +1,5 @@
 package pro.sky.java.homeworks.course2.coursework.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,18 +7,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.homeworks.course2.coursework.data.Question;
 import pro.sky.java.homeworks.course2.coursework.data.QuestionRepository;
-import pro.sky.java.homeworks.course2.coursework.service.QuestionService;
 
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/java")
-public class JavaQuestionController {
+@RequestMapping("/math")
+public class MathQuestionController {
 
-    @Qualifier("javaQuestionRepositoryImpl")
+    @Qualifier("mathQuestionRepositoryImpl")
     private final QuestionRepository questionRepository;
 
-    public JavaQuestionController(@Qualifier("javaQuestionRepositoryImpl") QuestionRepository questionRepository) {
+    public MathQuestionController(@Qualifier("mathQuestionRepositoryImpl") QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
 
@@ -40,3 +38,4 @@ public class JavaQuestionController {
         return questionRepository.getAll();
     }
 }
+
