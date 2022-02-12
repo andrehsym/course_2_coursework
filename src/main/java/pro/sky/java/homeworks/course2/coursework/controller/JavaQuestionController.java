@@ -1,14 +1,13 @@
 package pro.sky.java.homeworks.course2.coursework.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.homeworks.course2.coursework.data.Question;
-import pro.sky.java.homeworks.course2.coursework.data.QuestionRepository;
 import pro.sky.java.homeworks.course2.coursework.service.QuestionService;
+import pro.sky.java.homeworks.course2.coursework.service.impl.JavaQuestionServiceImpl;
 
 import java.util.Collection;
 
@@ -16,27 +15,26 @@ import java.util.Collection;
 @RequestMapping("/java")
 public class JavaQuestionController {
 
-    @Qualifier("javaQuestionRepositoryImpl")
-    private final QuestionRepository questionRepository;
+    private final JavaQuestionServiceImpl javaQuestionService;
 
-    public JavaQuestionController(@Qualifier("javaQuestionRepositoryImpl") QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
+    public JavaQuestionController(@Qualifier("javaQuestionServiceImpl") JavaQuestionServiceImpl javaQuestionService) {
+        this.javaQuestionService = javaQuestionService;
     }
 
     @GetMapping("/add")
     public Question add(@RequestParam("question") String question, @RequestParam("answer") String answer) {
-        Question newQuest = questionRepository.add(question, answer);
+        Question newQuest = javaQuestionService.add(question, answer);
         return newQuest;
     }
 
     @GetMapping("/remove")
     public Question remove(@RequestParam("question") String question, @RequestParam("answer") String answer) {
-        Question removeQuest = questionRepository.remove(question, answer);
+        Question removeQuest = javaQuestionService.remove(question, answer);
         return removeQuest;
     }
 
     @GetMapping()
     public Collection<Question> getAll() {
-        return questionRepository.getAll();
+        return javaQuestionService.getAll();
     }
 }

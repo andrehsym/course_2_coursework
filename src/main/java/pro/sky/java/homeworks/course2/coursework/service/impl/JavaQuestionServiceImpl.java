@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import pro.sky.java.homeworks.course2.coursework.data.impl.JavaQuestionRepositoryImpl;
 import pro.sky.java.homeworks.course2.coursework.data.Question;
+import pro.sky.java.homeworks.course2.coursework.exceptions.QuestionNotFoundException;
 import pro.sky.java.homeworks.course2.coursework.service.QuestionService;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +20,27 @@ public class JavaQuestionServiceImpl implements QuestionService {
         this.javaQuestionRepositoryImpl = javaQuestionRepositoryImpl;
     }
 
-        @Override
+    public Question add(String question, String answer) {
+        return javaQuestionRepositoryImpl.add(question, answer);
+    }
+
+    public Question add(Question question) {
+        return javaQuestionRepositoryImpl.add(question);
+    }
+
+    public Question remove(String question, String answer) {
+        return javaQuestionRepositoryImpl.remove(question, answer);
+    }
+
+    public Question remove(Question question) {
+        return javaQuestionRepositoryImpl.remove(question);
+    }
+
+    public Collection<Question> getAll() {
+        return javaQuestionRepositoryImpl.getAll();
+    }
+
+    @Override
     public Question getRandomQuestion() {
         Random r = new Random();
         List<Question> forRandomQuestionList = new ArrayList(List.copyOf(javaQuestionRepositoryImpl.getAll()));

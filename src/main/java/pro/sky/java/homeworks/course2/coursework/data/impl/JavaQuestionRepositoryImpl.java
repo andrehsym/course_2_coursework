@@ -6,25 +6,14 @@ import pro.sky.java.homeworks.course2.coursework.data.Question;
 import pro.sky.java.homeworks.course2.coursework.data.QuestionRepository;
 import pro.sky.java.homeworks.course2.coursework.exceptions.QuestionNotFoundException;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Repository
 public class JavaQuestionRepositoryImpl implements QuestionRepository {
-//правильный ли конструктор...
-
-//    private JavaQuestionRepositoryImpl javaQuestionRepository;
-
-//    @Bean
-//    public JavaQuestionRepositoryImpl javaQuestionRepositoryImpl() {
-//        return new JavaQuestionRepositoryImpl();
-//    }
 
     private Set<Question> javaQuestions = new HashSet<>();
 
-        @Override
+    @Override
     public Question add(String question, String answer) {
         Question newQuestion = new Question(question, answer);
         return add(newQuestion);
@@ -61,4 +50,5 @@ public class JavaQuestionRepositoryImpl implements QuestionRepository {
     public Collection<Question> getAll() {
             return List.copyOf(javaQuestions);
     }
+
 }

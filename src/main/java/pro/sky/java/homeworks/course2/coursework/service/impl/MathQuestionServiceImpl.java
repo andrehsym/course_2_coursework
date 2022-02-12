@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 import pro.sky.java.homeworks.course2.coursework.data.Question;
 import pro.sky.java.homeworks.course2.coursework.data.impl.JavaQuestionRepositoryImpl;
 import pro.sky.java.homeworks.course2.coursework.data.impl.MathQuestionRepositoryImpl;
+import pro.sky.java.homeworks.course2.coursework.exceptions.QuestionNotFoundException;
 import pro.sky.java.homeworks.course2.coursework.service.QuestionService;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -19,6 +21,26 @@ public class MathQuestionServiceImpl implements QuestionService {
 
     public MathQuestionServiceImpl(@Qualifier("mathQuestionRepositoryImpl") MathQuestionRepositoryImpl mathQuestionRepositoryImpl) {
         this.mathQuestionRepositoryImpl = mathQuestionRepositoryImpl;
+    }
+
+    public Question add(String question, String answer) {
+        return mathQuestionRepositoryImpl.add(question, answer);
+    }
+
+    public Question add(Question question) {
+        return mathQuestionRepositoryImpl.add(question);
+    }
+
+    public Question remove(String question, String answer) {
+        return mathQuestionRepositoryImpl.remove(question, answer);
+    }
+
+    public Question remove(Question question) {
+        return mathQuestionRepositoryImpl.remove(question);
+    }
+
+    public Collection<Question> getAll() {
+        return mathQuestionRepositoryImpl.getAll();
     }
 
     @Override

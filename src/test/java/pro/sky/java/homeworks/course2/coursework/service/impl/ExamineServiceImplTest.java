@@ -20,19 +20,11 @@ class ExamineServiceImplTest {
 
     private ExamineServiceImpl out;
 
-    @Mock
-    @Qualifier("javaQuestionRepositoryImpl")
-    private final QuestionRepository javaQuestionRepositoryMock = mock(QuestionRepository.class);
-
-    @Mock
-    @Qualifier("mathQuestionRepositoryImpl")
-    private final QuestionRepository mathQuestionRepositoryMock = mock(QuestionRepository.class);
-
     @Qualifier("javaQuestionServiceImpl")
-    private final QuestionService javaQuestionServiceMock = mock(JavaQuestionServiceImpl.class);
+    private final JavaQuestionServiceImpl javaQuestionServiceMock = mock(JavaQuestionServiceImpl.class);
 
     @Qualifier("mathQuestionServiceImpl")
-    private final QuestionService mathQuestionServiceMock = mock(MathQuestionServiceImpl.class);
+    private final MathQuestionServiceImpl mathQuestionServiceMock = mock(MathQuestionServiceImpl.class);
 
     private List<Question> javaQuestions;
     private List<Question> mathQuestions;
@@ -47,8 +39,9 @@ class ExamineServiceImplTest {
 
     @BeforeEach
     public void start() {
-        out = new ExamineServiceImpl(javaQuestionServiceMock, mathQuestionServiceMock,
-                                    javaQuestionRepositoryMock, mathQuestionRepositoryMock);
+//        out = new ExamineServiceImpl(javaQuestionServiceMock, mathQuestionServiceMock,
+//                                    javaQuestionRepositoryMock, mathQuestionRepositoryMock);
+        out = new ExamineServiceImpl(javaQuestionServiceMock, mathQuestionServiceMock);
         javaQuestions = new ArrayList<>();
         javaQuestion1 = new Question("integer variable types", "int short byte long");
         javaQuestion2 = new Question("character variable type", "char");
@@ -71,8 +64,8 @@ class ExamineServiceImplTest {
 
     @Test
     void testGetQuestions() {
-        when(javaQuestionRepositoryMock.getAll()).thenReturn(javaQuestions);
-        when(mathQuestionRepositoryMock.getAll()).thenReturn(mathQuestions);
+        when(javaQuestionServiceMock.getAll()).thenReturn(javaQuestions);
+        when(mathQuestionServiceMock.getAll()).thenReturn(mathQuestions);
         when(javaQuestionServiceMock.getRandomQuestion()).thenReturn(javaQuestion1, javaQuestion2, javaQuestion3, javaQuestion4);
         when(mathQuestionServiceMock.getRandomQuestion()).thenReturn(mathQuestion1, mathQuestion2, mathQuestion3, mathQuestion4);
 
@@ -86,7 +79,16 @@ class ExamineServiceImplTest {
         randomQuestionTestList.add(mathQuestion3);
         randomQuestionTestList.add(mathQuestion4);
 
-        assertIterableEquals(randomQuestionTestList, out.getQuestions(8));
+//        assertIterableEquals(randomQuestionTestList, out.getQuestions(8));
+
+        assertTrue(out.getQuestions(8).contains(javaQuestion1));
+        assertTrue(out.getQuestions(8).contains(javaQuestion2));
+        assertTrue(out.getQuestions(8).contains(javaQuestion3));
+        assertTrue(out.getQuestions(8).contains(javaQuestion4));
+        assertTrue(out.getQuestions(8).contains(mathQuestion1));
+        assertTrue(out.getQuestions(8).contains(mathQuestion2));
+        assertTrue(out.getQuestions(8).contains(mathQuestion3));
+        assertTrue(out.getQuestions(8).contains(mathQuestion4));
     }
 
     @Test
